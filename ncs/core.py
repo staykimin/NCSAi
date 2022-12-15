@@ -41,15 +41,56 @@ class NCS_Core:
 		datas = ncs.BukaDb(ncs.dasar)
 		data = datas['prefix']
 		for i in data:
-			total = len(i)
-			if i in kata:
-				# return kata.replace(i, '')[0:1:]
-				if kata.replace(i, '')[1:2:] in datas["vocal"]:
-					if len(kata.replace(i, '')) > 3:
-						return kata.replace(i, '')
-				else:
-					if len(kata.replace(f"{i}r", '')) > 3:
-						return kata.replace(f"{i}r", '')
+		    total = len(i)
+		    if i in kata and kata[0:len(i)] == i:
+		    	if i == "pe":
+		    		if kata[len(i):len(i)+2:] == "ng":
+		    			if kata[len(i+"ng"):len(i+"ng")+1] in datas["vocal"]:
+		    				return kata[len(i):len(kata):]
+		    			else:
+		    				return kata[len(i+"ng"):len(kata):]
+		    		elif kata[len(i):len(i)+1:] == "n":
+		    			if kata[len(i+"n"):len(i+"n")+1] in datas["vocal"]:
+		    				return kata[len(i):len(kata):]
+		    			else:
+		    				return kata[len(i+"n"):len(kata):]
+		    		elif kata[len(i):len(i)+1:] == "m":
+		    			if kata[len(i+"m"):len(i+"m")+1] in datas["vocal"]:
+		    				return kata[len(i):len(kata):]
+		    			else:
+		    				return kata[len(i+"m"):len(kata):]
+		    		else:
+		    			return kata[len(i):len(kata):]
+		    	elif i == "me":
+		    		if kata[len(i):len(i)+2:] == "ng":
+		    			if kata[len(i+"ng"):len(i+"ng")+1] in datas["vocal"]:
+		    				return kata[len(i):len(kata):]
+		    			else:
+		    				return kata[len(i+"ng"):len(kata):]
+		    		elif kata[len(i):len(i)+1:] == "n":
+		    			if kata[len(i+"n"):len(i+"n")+1] in datas["vocal"]:
+		    				return kata[len(i):len(kata):]
+		    			else:
+		    				return kata[len(i+"n"):len(kata):]
+		    		elif kata[len(i):len(i)+1:] == "m":
+		    			if kata[len(i+"m"):len(i+"m")+1] in datas["vocal"]:
+		    				return kata[len(i):len(kata):]
+		    			else:
+		    				return kata[len(i+"m"):len(kata):]
+		    		else:
+		    			return kata[len(i):len(kata):]
+		    	else:
+		    		return kata[len(i):len(kata):]
+# 			total = len(i)
+# 			if i in kata:
+# 				# return kata.replace(i, '')[0:1:]
+# 				if kata.replace(i, '')[1:2:] in datas["vocal"]:
+# 					if len(kata.replace(i, '')) > 3:
+# 						return kata.replace(i, '')
+# 				else:
+# 					if len(kata.replace(f"{i}r", '')) > 3:
+# 						return kata.replace(f"{i}r", '')
+
 		return kata
 	
 	def Transfrom(ncs, data):
