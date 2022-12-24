@@ -5,6 +5,17 @@ class NCS_Core:
 		ncs.stopword = stopword
 		ncs.db = db
 		ncs.script = db_script
+		
+	def Cleaning(ncs, kata):
+	      hasil = []
+	      for a in kata.lower().split(" "):
+		      temp = ""
+		      for i in a:
+			      if i.isalpha() or i.isnumeric():
+				      temp = temp + i
+		      hasil.append(temp)
+	      hasil = ' '.join(hasil)
+	      return hasil
 	
 	def GetSC(ncs, sc):
 		file = os.listdir(f"{ncs.script}/{sc}")
@@ -151,6 +162,31 @@ class NCS_Core:
 		if label == 1:
 			hasil = ncs.GetSC(hasil)
 		return hasil
+	
+	def BukaWiki(ncs, data):
+        subject = data
+ 
+        url = 'https://id.wikipedia.org/w/api.php'
+        params = {
+                    'action': 'parse',
+                    'page': subject,
+                    'format': 'json',
+                    'prop':'text',
+                    'redirects':''
+                }
+        
+        response = requests.get(url, params=params)
+        data = response.json()
+        
+        raw_html = data['parse']['text']['*']
+        soup = BeautifulSoup(raw_html,'html.parser')
+        soup.find_all('p')
+        text = []
+        
+        for p in soup.find_all('p'):
+            text.append(p.text)
+
+        return text[0]
 	
 	def NCSAi(ncs, quest):
 		kata = ncs.Parse_Kalimat(quest)
